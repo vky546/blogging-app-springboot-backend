@@ -72,6 +72,7 @@ public class PostController {
 		}
 	
 		//get all post
+		//vikkey
 		@GetMapping("/posts")
 		public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 				@RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
