@@ -2,10 +2,12 @@ package com.javaproject.blog.services.impl;
 import com.javaproject.blog.exceptions.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.javaproject.blog.entities.User;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -83,6 +88,17 @@ public class UserServiceImpl implements UserService{
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
 		return userDto;
 		
+	}
+
+	@Override
+	public UserDto registerNewUser(UserDto userDto) {
+		User user = this.modelMapper.map(userDto, User.class);
+		//encoded the password
+		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+		
+		
+		//roles
+		return null;
 	}
 
 }
